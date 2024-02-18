@@ -103,7 +103,7 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen w-[100%]">
+    <div className="h-screen w-[100%] overflow-x-hidden">
       <Header />
       <div className="absolute">
         <img
