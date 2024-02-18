@@ -1,15 +1,15 @@
-import { useRef, useState } from "react";
-import Header from "./Header";
-import checkValidData from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../redux/userSlice";
+import { auth } from "../utils/firebase";
+import checkValidData from "../utils/validate";
+import Header from "./Header";
+import { userImage } from "../utils/constants";
 
 const Login = () => {
   //* hooks section
@@ -24,7 +24,6 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // -------------------- --------------------
@@ -59,8 +58,7 @@ const Login = () => {
           console.log(user);
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL:
-              "https://i.pinimg.com/474x/b6/73/13/b6731331a45830e03961e7908434e966.jpg",
+            photoURL: userImage,
           })
             .then(() => {
               // Profile updated!
@@ -73,8 +71,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
-              // ...
             })
             .catch((error) => {
               // An error occurred
@@ -97,8 +93,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;

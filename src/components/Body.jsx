@@ -1,19 +1,10 @@
-import React, { useEffect } from "react";
-import Login from "./Login";
-import Browse from "./Browse";
-import { onAuthStateChanged } from "firebase/auth";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  useNavigate,
-} from "react-router-dom";
-import { auth } from "../utils/firebase";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { addUser, removeUser } from "../redux/userSlice";
-const Body = () => {
-  // hooks
-  const dispatch = useDispatch();
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Browse from "./Browse";
+import Login from "./Login";
 
+const Body = () => {
   // router
   const appRouter = createBrowserRouter([
     {
@@ -29,22 +20,6 @@ const Body = () => {
       element: <Browse />,
     },
   ]);
-
-  // we want onAuthState to change only once so we will use useEffect
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      // it is kind of a listener which listens to the auth state change
-      if (user) {
-        const { uid, email, displayName, photoURL } = user;
-        dispatch(
-          addUser({ uid, email, displayName: displayName, photoURL: photoURL })
-        );
-      } else {
-        // User is signed out
-        dispatch(removeUser());
-      }
-    });
-  }, []);
 
   return (
     <div className="overflow-hidden">
