@@ -27,3 +27,5 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "zh", name: "中文" },
   { identifier: "ru", name: "Русский" },
 ];
+
+export const OPENAI_KEY = "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";
