@@ -5,9 +5,9 @@ const VideoBackground = ({ movieId }) => {
   const trailerVideo = useSelector((store) => store.movies.trailerVideo);
   useMovieTrailer({ movieId });
   return (
-    <div className="w-screen h-screen ">
+    <div className="">
       <iframe
-        className="w-screen h-screen aspect-video"
+        className="w-screen aspect-video"
         src={
           "https://www.youtube.com/embed/" +
           trailerVideo?.key +

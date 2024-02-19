@@ -3,7 +3,7 @@ import { FaPlay } from "react-icons/fa";
 import { GoInfo } from "react-icons/go";
 const VideoTitle = ({ title, original_language, popularity, overview }) => {
   return (
-    <div className="pt-[18%] px-10 absolute text-white bg-gradient-to-r from-black w-screen h-screen aspect-video ">
+    <div className="pt-[10%] px-10 absolute text-white bg-gradient-to-r from-black w-full h-screen aspect-video ">
       <h1 className="text-6xl">{title}</h1>
       <p>
         Language:{" "}
@@ -11,7 +11,7 @@ const VideoTitle = ({ title, original_language, popularity, overview }) => {
           {original_language}
         </span>
       </p>
-      <p className="py-6 text-lg w-1/4">{overview}</p>
+      <p className="py-6 text-lg w-1/3">{overview}</p>
       <p className="mb-5">
         Rating: <span className="text-yellow-400 font-bold">{popularity}</span>
       </p>

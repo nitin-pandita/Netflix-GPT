@@ -46,7 +46,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute px-8 py-2 bg-gradient-to-b from-black z-10 w-screen flex justify-between items-center ">
+    <div className="absolute px-8   bg-gradient-to-b from-black z-10 w-[100%] flex justify-between items-center ">
       <h1 className="text-netflixRed font-bold text-[40px]">NETFLIX GPT</h1>
       {user && (
         <div className="flex">

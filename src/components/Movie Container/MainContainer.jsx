@@ -7,17 +7,22 @@ import { addNowPlayingMovies } from "../../redux/movieSlice";
 const MainContainer = () => {
   const movies = useSelector((store) => store.movies.movie);
   if (!movies) return;
-  const renderMovie = movies[0];
+  const renderMovie = movies[2];
   // extracting data from the render Movie
-  const { original_title, original_language, popularity, overview, id } =
-    renderMovie;
-
+  const {
+    original_title,
+    original_language,
+    popularity,
+    vote_average,
+    overview,
+    id,
+  } = renderMovie;
   return (
     <div className="">
       <VideoTitle
         title={original_title}
         original_language={original_language}
-        popularity={popularity}
+        popularity={vote_average}
         overview={overview}
       />
       <VideoBackground movieId={id} />
