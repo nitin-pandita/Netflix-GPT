@@ -5,8 +5,7 @@ export const API_OPTION = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZDliZmQyZGJlMjdiNDhmZTAyMWMyM2EzYWM1ZmRlYSIsInN1YiI6IjY0MjNkZTcyYzA0NDI5MDFmMDAwODU2YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.LTP-mkt0z1xlwS8gh6oUcdcKUwNW7saTiFHwk7lbmSI",
+    Authorization: "Bearer " + process.env.REACT_APP_MOVIE_API,
   },
 };
 
@@ -28,4 +27,4 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "ru", name: "Русский" },
 ];
 
-export const OPENAI_KEY = "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";
+export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
