@@ -9,7 +9,7 @@ import { addUser } from "../redux/userSlice";
 import { auth } from "../utils/firebase";
 import checkValidData from "../utils/validate";
 import Header from "./Header";
-import { userImage } from "../utils/constants";
+import { BG_IMG, userImage } from "../utils/constants";
 
 const Login = () => {
   //* hooks section
@@ -105,10 +105,7 @@ const Login = () => {
     <div className="h-screen w-[100%] overflow-x-hidden">
       <Header />
       <div className="absolute">
-        <img
-          className=" object-cover"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/c0b69670-89a3-48ca-877f-45ba7a60c16f/2642e08e-4202-490e-8e93-aff04881ee8a/IN-en-20240212-popsignuptwoweeks-perspective_alpha_website_large.jpg"
-        />
+        <img className=" object-cover" src={BG_IMG} />
       </div>
       <form className="bg-black absolute my-36 left-0 right-0 mx-auto w-3/12 p-12 rounded-lg bg-opacity-85 ">
         <h1 className="text-white text-3xl py-4 font-bold">
