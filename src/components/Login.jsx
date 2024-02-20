@@ -102,12 +102,12 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen w-[100%] overflow-x-hidden">
+    <div className="h-screen w-screen ">
       <Header />
       <div className="absolute">
-        <img className=" object-cover" src={BG_IMG} />
+        <img className="h-screen object-cover" src={BG_IMG} />
       </div>
-      <form className="bg-black absolute my-36 left-0 right-0 mx-auto w-3/12 p-12 rounded-lg bg-opacity-85 ">
+      <form className="bg-black absolute my-36 left-0 right-0 mx-auto w-full md:w-3/12  p-8  md:p-12 rounded-lg bg-opacity-85 ">
         <h1 className="text-white text-3xl py-4 font-bold">
           {" "}
           {isSignedIn ? "Sign In" : "Sign Up"}

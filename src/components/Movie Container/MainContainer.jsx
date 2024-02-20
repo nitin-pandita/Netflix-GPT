@@ -18,7 +18,7 @@ const MainContainer = () => {
     id,
   } = renderMovie;
   return (
-    <div className="">
+    <div className="pt-[38%] md:pt-0 bg-black">
       <VideoTitle
         title={original_title}
         original_language={original_language}

@@ -65,14 +65,16 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute px-8 bg-gradient-to-b from-black z-10 w-[100%] flex justify-between items-center ">
-      <h1 className="text-netflixRed font-bold text-[40px]">NETFLIX GPT</h1>
+    <div className="absolute px-8 bg-gradient-to-b from-black z-10 w-[100%] flex flex-col md:flex-row  justify-between items-center ">
+      <h1 className="text-netflixRed font-bold text-[27px] md:text-[40px]  mb-5 md:mb-0">
+        NETFLIX GPT
+      </h1>
       {user && (
         <div className="flex">
           {showGptSearch && (
             <select
               onChange={handleLanguageChange}
-              className="appearance-none bg-gray-100 border border-gray-300 rounded-md py-2 pl-3 pr-10 text-sm leading-5 focus:outline-none focus:border-netflix-blue focus:ring-1 focus:ring-netflix-blue focus:ring-opacity-50 cursor-pointer"
+              className="appearance-none bg-gray-100 border border-gray-300 rounded-md py-2 pl-3 pr-10 text-sm leading-5 focus:outline-none focus:border-netflix-blue focus:ring-1 focus:ring-netflix-blue focus:ring-opacity-50 cursor-pointer "
             >
               {SUPPORTED_LANGUAGES.map((lang) => (
                 <option key={lang.identifier} value={lang.identifier}>
@@ -84,7 +86,7 @@ const Header = () => {
           <button
             onClick={handleGptSearch}
             className="
-          bg-red-600 hover:bg-red-700 text-white font-semibold py-1  px-5 rounded-sm mr-8 shadow-md flex items-center justify-center
+          bg-red-600 hover:bg-red-700 text-white font-semibold md:py-1  md:px-5 rounded-sm mr-8 shadow-md flex items-center text-[12px] px-2  justify-center mx-4
           "
           >
             {showGptSearch ? (
@@ -95,12 +97,15 @@ const Header = () => {
             ) : (
               <div className="flex">
                 GPT Search{" "}
-                <IoChatboxEllipsesOutline size={"23px"} className="ml-3" />
+                <IoChatboxEllipsesOutline className="ml-3 text-[20px] md:text-[23px]" />
               </div>
             )}
           </button>
           <img src={user?.photoURL} className="w-12 rounded-full" alt="" />
-          <button onClick={handleSignOut} className="text-white  text-lg mx-3 ">
+          <button
+            onClick={handleSignOut}
+            className="text-white text-[12px] md:text-lg mx-3 "
+          >
             Sign Out
           </button>
         </div>
