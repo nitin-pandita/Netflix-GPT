@@ -1,70 +1,308 @@
-# Getting Started with Create React App
+# Netflix GPT - ( Project )
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+We will be building a Netflix using the Chat GPT API.
 
-## Available Scripts
+Firstly let’s set up the project using the command called 
 
-In the project directory, you can run:
+```jsx
+npx create-react-app netflix-gpt
+```
 
-### `npm start`
+When we run this command we will get all the bundlers, test files, and packages and we installed them manually in the beginning. In “**create-react-app**” we use **webpack** for hosting and compiling
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Step2:  Configure the Tailwind CSS into our Application for Styling
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Step3: Not let’s see what features we need to add to our application
 
-### `npm test`
+For LogOut User
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Login/Logout Page
 
-### `npm run build`
+For the Login User
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Header
+2. Main Movie
+    1. Trailer in background
+    2. Title and Description
+    3. Play now button
+    4. Movie Suggestion
+    5. Movie List (vertical scroll)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Netflix GPT
+    - Search bar
+    - Movie Suggestion
+    
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Configuration of the routers for routing.
 
-### `npm run eject`
+```jsx
+const Body = () => {
+  const appRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <Login />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/browse",
+      element: <Browse />,
+    },
+  ]);
+  return (
+    <div>
+      <RouterProvider router={appRouter} />
+    </div>
+  );
+};
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Let’s first build our Login Page and it will look like this:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Untitled](Netflix%20GPT%20-%20(%20Project%20)%20fde1f903ca77430290c0942315999088/Untitled.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Now let’s create a signup page, by making use of useState we can use this signed form to build our signup form
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![Untitled](Netflix%20GPT%20-%20(%20Project%20)%20fde1f903ca77430290c0942315999088/Untitled%201.png)
 
-## Learn More
+```jsx
+<form className="bg-black absolute my-36 left-0 right-0 mx-auto w-3/12 p-12 rounded-sm bg-opacity-85 ">
+        <h1 className="text-white text-3xl py-4 font-bold">
+          {" "}
+          {isSignedIn ? "Sign In" : "Sign Up"}
+        </h1>
+        {!isSignedIn && (
+          <input
+            type="text"
+            placeholder="Name"
+            className="p-4 my-2 w-full outline-none bg-[#696969] placeholder:text-white"
+          />
+        )}
+        <input
+          type="text"
+          placeholder="Email Address"
+          className="p-4 my-2 w-full outline-none bg-[#696969] placeholder:text-white"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          className="p-4 my-2 w-full outline-none bg-[#696969] placeholder:text-white"
+        />
+        <button className=" my-2 bg-netflixRed text-white p-4 rounded-sm w-full">
+          {isSignedIn ? "Sign In" : "Sign Up"}
+        </button>
+        {isSignedIn ? (
+          <p
+            className="text-white text-center cursor-pointer"
+            onClick={handleSignIn}
+          >
+            New to Netflix?{" "}
+            <span className="text-netflixRed font-bold">| Sign up now.</span>
+          </p>
+        ) : (
+          <p
+            className="text-netflixRed font-bold text-center cursor-pointer"
+            onClick={handleSignIn}
+          >
+            Already a User
+          </p>
+        )}
+      </form>
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+In form we need validation. So in React, we have a library called “**Forkmik**”
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+But we will be making it from Scratch.
 
-### Code Splitting
+Let’s create a **validation.js**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```jsx
+const checkValidData = (email, password) => {
+  const isEmailValid = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+  const isPasswordValid =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(password);
 
-### Analyzing the Bundle Size
+  if (isEmailValid) return "Email is not Valid";
+  if (isPasswordValid) return "Password is not Valid";
+};
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+export default checkValidData;
+```
 
-### Making a Progressive Web App
+Now we can use “useState” for each input or we can use a thing called “**useRef** ”
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Inside this we will use a logic :
 
-### Advanced Configuration
+```jsx
+const handleButtonClick = (e) => {
+    e.preventDefault();
+    // validating the form data
+    const message = checkValidData(
+      email.current.value,
+      password.current.value,
+      name.current.value
+    );
+    setError(message);
+  };
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+useRef gives us an object that will contain the value and we can use that value to validate the data.
 
-### Deployment
+## Let’s move to the auth part:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+For authentication, we will be using Google Firebase 
 
-### `npm run build` fails to minify
+Sign Up and Sign In User Account:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```jsx
+//* SignUp and Sign In Logic
+    if (!isSignedIn) {
+      // sign up logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current?.value,
+        password.current?.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setError(errorMessage + " " + errorCode);
+        });
+    } else {
+      // sign in logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current?.value,
+        password.current?.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = "User not found";
+          setError(errorMessage + " " + errorCode);
+        });
+    }
+```
+
+All this logic is coming from the F**irebase**
+
+## Setting up the Redux Store:
+
+We need to install the redux toolkit and react-redux
+
+```jsx
+npm i @reactjs/react
+```
+
+```jsx
+npm i react-redux
+```
+
+Creating appStore
+
+```jsx
+import { configureStore } from "@reduxjs/toolkit";
+import userSlice from "./userSlice";
+const appStore = configureStore({
+  reducer: {
+    user: userSlice,
+  },
+});
+
+export default appStore;
+```
+
+Creating user Slice
+
+```jsx
+import { createSlice } from "@reduxjs/toolkit";
+
+const userSlice = createSlice({
+  name: "user",
+  initialState: null,
+  reducers: {
+    addUser: (state, action) => {
+      return action.payload;
+    },
+    removeUser: (state, action) => {
+      return null;
+    },
+  },
+});
+
+export const { addUser, removeUser } = userSlice.actions;
+
+export default userSlice.reducer;
+```
+
+Using it in the Application:
+
+```jsx
+import { Provider } from "react-redux";
+import Body from "./components/Body";
+import appStore from "./redux/appStore";
+function App() {
+  return (
+    <Provider store={appStore}>
+      <Body />
+    </Provider>
+  );
+}
+
+export default App;
+```
+
+- Bug fixing of sign-up user display and profile picture update
+- If the user is not logged in Redirect to /browse the page
+- Unsubscribe to the onauthStateChange Callback.
+- I added hardcoded values to the constants file.
+
+## [Movie Data](https://avatars.githubusercontent.com/u/6759280?v=4):
+
+Using the TMDB we have got the movie data
+
+- Register TMDB API create an app and get access token
+- Get data from TMDB now playing movie list API
+
+## Created our MainContainer:
+
+- Setting the data into our redux store and fetching it on the mainContainer
+- Fetch Data and Trailer
+- Updating the store with the redux data
+- Enabling the YouTube video and making it **autoplay** and **mute**
+- Tailwind CSS class for styling
+
+![Untitled](Netflix%20GPT%20-%20(%20Project%20)%20fde1f903ca77430290c0942315999088/Untitled%202.png)
+
+## Building Secondary Component:
+
+![Untitled](Netflix%20GPT%20-%20(%20Project%20)%20fde1f903ca77430290c0942315999088/Untitled%203.png)
+
+## Building the NETFLIX GPT:
+
+Adding GPT Search Feature
+
+- Added GPT Search Bar
+- ( **Feature** ) Mulit Lang feature in our App
+
+![Untitled](Netflix%20GPT%20-%20(%20Project%20)%20fde1f903ca77430290c0942315999088/Untitled%204.png)
+
+- Added the Open Ai  Api to the store.
+- Hidde the API keys
+
+![Untitled](Netflix%20GPT%20-%20(%20Project%20)%20fde1f903ca77430290c0942315999088/Untitled%205.png)
+
+- Made it responsive for mobile and Desktop
+
+![Untitled](Netflix%20GPT%20-%20(%20Project%20)%20fde1f903ca77430290c0942315999088/Untitled%206.png)
