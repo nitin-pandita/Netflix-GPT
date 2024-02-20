@@ -61,7 +61,7 @@ const GptSearchBar = () => {
           className="p-4 m-4  bg-gray-800 text-white rounded-sm col-span-9"
         />
         <button
-          className="py-2 m-4 px-4 col-span-3 bg-netflixRed text-white rounded-sm "
+          className="py-2 m-4 px-4 col-span-3 bg-netflixRed text-white rounded-sm w-[90%] md:w-[80%]"
           onClick={handleGptSearch}
         >
           {language[lang].GptSearchBar.button}

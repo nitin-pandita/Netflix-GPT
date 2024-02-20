@@ -9,10 +9,10 @@ const GptSearch = () => {
         <img
           src={BG_IMG}
           alt="Background Image"
-          className="h-screen w-screen object-cover"
+          className="h-auto w-screen object-cover"
         />
       </div>
-      <div className="">
+      <div className="bg-black md:bg-none">
         <GptSearchBar />
         <GptSuggestions />
       </div>

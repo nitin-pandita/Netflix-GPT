@@ -105,7 +105,7 @@ const Login = () => {
     <div className="h-screen w-screen ">
       <Header />
       <div className="absolute">
-        <img className="h-screen object-cover" src={BG_IMG} />
+        <img className="h-screen w-screen object-cover" src={BG_IMG} />
       </div>
       <form className="bg-black absolute my-36 left-0 right-0 mx-auto w-full md:w-3/12  p-8  md:p-12 rounded-lg bg-opacity-85 ">
         <h1 className="text-white text-3xl py-4 font-bold">
